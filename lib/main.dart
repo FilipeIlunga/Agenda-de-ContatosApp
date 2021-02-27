@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'View/contactPage.dart';
 
 void main() => runApp(
-      DevicePreview(
-        builder: (context) => MyApp(),
-        enabled: !kReleaseMode,
-      ),
+      //    DevicePreview(
+      //     builder: (context) =>
+      MyApp(),
+      //   enabled: !kReleaseMode,
+      //  ),
     );
 
 class MyApp extends StatelessWidget {
