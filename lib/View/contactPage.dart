@@ -188,14 +188,14 @@ class _ContactPageState extends State<ContactPage> {
             content: Text('Ao sair, as alterações serão perdidas.'),
             actions: [
               FlatButton(
-                child: Text('Cancelar'),
+                child: Text('CANCELAR'),
                 onPressed: () {
                   //Se cancelar, o AlertDialog sumirá, e o usuário ficara na pagina de edição
                   Navigator.pop(context);
                 },
               ),
               FlatButton(
-                child: Text('Sim'),
+                child: Text('SIM'),
                 onPressed: () {
                   // Se apertar em SIM, o AlertDialog e a contactPage sumirão
                   // e o usuário voltará para homePage
@@ -248,23 +248,6 @@ class _ContactPageState extends State<ContactPage> {
             Row(
               children: [
                 Icon(Icons.photo),
-                FlatButton(
-                  child: Text('Selecionar imagem da galeria'),
-                  onPressed: () {
-                    _userEdited = true;
-                    ImagePicker.pickImage(source: ImageSource.gallery)
-                        .then((file) {
-                      if (file == null) {
-                        return;
-                      } else {
-                        setState(() {
-                          _editedContact.image = file.path;
-                        });
-                      }
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
               ],
             ),
           ],
