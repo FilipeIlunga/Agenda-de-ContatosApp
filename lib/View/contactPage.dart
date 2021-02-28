@@ -63,7 +63,7 @@ class _ContactPageState extends State<ContactPage> {
             children: [
               GestureDetector(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 15),
                   child: Hero(
                     tag: _editedContact.id.toString(),
                     child: Container(
@@ -80,7 +80,7 @@ class _ContactPageState extends State<ContactPage> {
                         shape: BoxShape.circle,
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(90),
+                        borderRadius: BorderRadius.circular(90.0),
                         child: Image(
                           image: _editedContact.image != null
                               ? FileImage(File(_editedContact.image))
