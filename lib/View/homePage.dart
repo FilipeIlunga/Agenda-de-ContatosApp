@@ -246,8 +246,8 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       onTap: () {
-        _showContactPage(contact: contacts[index]);
-        // _showOptions(context, index);
+        // _showContactPage(contact: contacts[index]);
+        _showOptions(context, index);
       },
     );
   }
