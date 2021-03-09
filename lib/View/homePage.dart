@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                       helper.saveContact(_lastRemoved);
                     });
                   }),
-              duration: Duration(seconds: 2),
+              duration: Duration(seconds: 1),
             );
             Scaffold.of(context).showSnackBar(snack);
           });
