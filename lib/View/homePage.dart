@@ -195,18 +195,24 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      Text(
-                        contacts[index].email ?? "",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 15,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          contacts[index].email ?? "",
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
-                      Text(
-                        contacts[index].phone ?? "",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          contacts[index].phone ?? "",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
                         ),
                       )
                     ],
@@ -260,6 +266,7 @@ class _HomePageState extends State<HomePage> {
           onClosing: () {},
           builder: (context) {
             return Container(
+              color: Colors.purpleAccent,
               padding: EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -272,11 +279,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Icon(
                           Icons.call,
-                          color: Colors.green,
+                          color: Colors.green[900],
                         ),
                         Text('Ligar',
-                            style: TextStyle(
-                                color: Colors.deepPurple, fontSize: 20.0)),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0)),
                       ],
                     ),
                     onPressed: () {
@@ -292,8 +299,8 @@ class _HomePageState extends State<HomePage> {
                         Icon(Icons.edit, color: Colors.blue),
                         SizedBox(width: 20),
                         Text('Editar',
-                            style: TextStyle(
-                                color: Colors.deepPurple, fontSize: 20.0)),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0)),
                       ],
                     ),
                     onPressed: () {
