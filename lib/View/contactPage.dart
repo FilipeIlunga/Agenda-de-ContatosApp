@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:agenda_de_contatos/helper/contact_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class ContactPage extends StatefulWidget {
   final Contact contact;
@@ -49,7 +50,29 @@ class _ContactPageState extends State<ContactPage> {
     //sair da tela quando clicar em voltar para a tela anterior
     // atraves do botação de voltar que fica no appBar
     return WillPopScope(
-      onWillPop: _requestPop,
+      onWillPop: () {
+        if (_userEdited) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.WARNING,
+            borderSide: BorderSide(color: Colors.purple[100], width: 2),
+            width: 300,
+            buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+            headerAnimationLoop: false,
+            animType: AnimType.BOTTOMSLIDE,
+            title: 'Descartar Alterações?',
+            desc: 'Ao sair, as alterações serão perdidas.',
+            showCloseIcon: true,
+            btnCancelOnPress: () {},
+            btnOkOnPress: () {
+              Navigator.pop(context);
+            },
+          )..show();
+          return Future.value(false);
+        } else {
+          return Future.value(true);
+        }
+      },
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.purple,
@@ -91,7 +114,51 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                   ),
                 ),
-                onTap: _photoContact,
+                onTap: () {
+                  AwesomeDialog(
+                    context: context,
+                    keyboardAware: true,
+                    showCloseIcon: true,
+                    headerAnimationLoop: false,
+                    dismissOnBackKeyPress: true,
+                    dialogType: DialogType.QUESTION,
+                    animType: AnimType.BOTTOMSLIDE,
+                    title: 'Upload da foto',
+                    btnCancelText: "Galeria",
+                    btnOkText: "Camera",
+                    desc: 'Qual meio deseja carregar a foto?',
+                    btnCancelColor: Colors.blue,
+                    btnCancelIcon: Icons.photo,
+                    btnOkIcon: Icons.camera,
+                    padding: const EdgeInsets.all(16.0),
+                    btnCancelOnPress: () {
+                      _userEdited = true;
+                      ImagePicker.pickImage(source: ImageSource.gallery)
+                          .then((file) {
+                        if (file == null) {
+                          return;
+                        } else {
+                          setState(() {
+                            _editedContact.image = file.path;
+                          });
+                        }
+                      });
+                    },
+                    btnOkOnPress: () {
+                      _userEdited = true;
+                      ImagePicker.pickImage(source: ImageSource.camera)
+                          .then((file) {
+                        if (file == null) {
+                          return;
+                        } else {
+                          setState(() {
+                            _editedContact.image = file.path;
+                          });
+                        }
+                      });
+                    },
+                  ).show();
+                },
               ),
               Card(
                 margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
@@ -174,104 +241,5 @@ class _ContactPageState extends State<ContactPage> {
         ),
       ),
     );
-  }
-
-  //Função que mostrar o AlertDialog quando o usuário alterar algo e quiser sair da tela sem salvar
-  Future<bool> _requestPop() {
-    //Se o usuário editu algo e não salvou
-    if (_userEdited) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Descartar Alterações?'),
-            content: Text('Ao sair, as alterações serão perdidas.'),
-            actions: [
-              FlatButton(
-                child: Text('CANCELAR'),
-                onPressed: () {
-                  //Se cancelar, o AlertDialog sumirá, e o usuário ficara na pagina de edição
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('SIM'),
-                onPressed: () {
-                  // Se apertar em SIM, o AlertDialog e a contactPage sumirão
-                  // e o usuário voltará para homePage
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        },
-      );
-      //Se o usuário alterou algo, ele não sairá automatciamente da tela
-      return Future.value(false);
-    } else {
-      // Se o usuário não alterou nada retornará um Future.value(true), ou seja
-      // será permitido ele sair da tela
-      //Sair automaticamente
-      return Future.value(true);
-    }
-  }
-
-  Future<bool> _photoContact() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          actions: [
-            Row(
-              children: [
-                Icon(Icons.camera),
-                FlatButton(
-                  child: Text('Tirar foto nova'),
-                  onPressed: () {
-                    _userEdited = true;
-                    ImagePicker.pickImage(source: ImageSource.camera)
-                        .then((file) {
-                      if (file == null) {
-                        return;
-                      } else {
-                        setState(() {
-                          _editedContact.image = file.path;
-                        });
-                      }
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(Icons.photo),
-                FlatButton(
-                  child: Text('Selecionar imagem da galeria'),
-                  onPressed: () {
-                    _userEdited = true;
-                    ImagePicker.pickImage(source: ImageSource.gallery)
-                        .then((file) {
-                      if (file == null) {
-                        return;
-                      } else {
-                        setState(() {
-                          _editedContact.image = file.path;
-                        });
-                      }
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-    //Se o usuário alterou algo, ele não sairá automatciamente da tela
-    return Future.value(false);
   }
 }
