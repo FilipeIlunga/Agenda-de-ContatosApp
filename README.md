@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-![gifApp2 (1)](https://user-images.githubusercontent.com/45888235/110660927-d26d5e00-81a2-11eb-9126-6dfebd693d18.gif)
+![gifApp2 (1)](blob:https://giphy.com/f05822b6-9052-4e09-ba37-d3ae2be2c505)
 
 
 
