@@ -16,4 +16,5 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-![App](https://media.giphy.com/media/ycyYEgq7j006bc7404/giphy.gif)
+![gifApp2 (1)](https://user-images.githubusercontent.com/45888235/110666958-89b8a380-81a8-11eb-8fab-90639ca5914e.gif)
+
