@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-![gifApp2 (1)](blob:https://giphy.com/f05822b6-9052-4e09-ba37-d3ae2be2c505)
+https://media.giphy.com/media/ycyYEgq7j006bc7404/giphy.gif
 
 
 
