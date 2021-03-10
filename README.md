@@ -17,9 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-https://media.giphy.com/media/ycyYEgq7j006bc7404/giphy.gif
-
-
-
-
-
+![Alt Text](https://media.giphy.com/media/ycyYEgq7j006bc7404/giphy.gif)
