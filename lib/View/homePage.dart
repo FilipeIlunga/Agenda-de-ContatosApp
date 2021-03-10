@@ -104,16 +104,15 @@ class _HomePageState extends State<HomePage> {
               ? SliverFillRemaining(
                   child: Column(
                     children: [
-                      ColorFiltered(
-                        colorFilter: ColorFilter.mode(
-                            Colors.purple[100], BlendMode.modulate),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 130.0),
                         child: Image(
                           image: AssetImage("assets/image/emptyState.png"),
-                          colorBlendMode: BlendMode.difference,
+                          width: 200,
                         ),
                       ),
-                      SizedBox(height: 40),
-                      Text("Não há contatos para mostrar",
+                      SizedBox(height: 20),
+                      Text("Sem contatos",
                           style: TextStyle(
                               fontSize: 23,
                               color: Colors.black87,
