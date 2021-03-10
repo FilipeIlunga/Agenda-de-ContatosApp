@@ -63,26 +63,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Contatos'),
-        backgroundColor: Colors.purple,
-        centerTitle: true,
-        actions: [
-          PopupMenuButton<OrderOptions>(
-            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
-              const PopupMenuItem<OrderOptions>(
-                child: Text('Ordenar de A-Z'),
-                value: OrderOptions.orderaz,
-              ),
-              const PopupMenuItem<OrderOptions>(
-                child: Text('Ordenar de Z-A'),
-                value: OrderOptions.orderza,
-              ),
-            ],
-            onSelected: _orderList,
-          )
-        ],
-      ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -95,40 +75,66 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.purple,
       ),
-      body: contacts.isEmpty
-          ? SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  children: [
-                    ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          Colors.purple[100], BlendMode.modulate),
-                      child: Image(
-                        image: AssetImage("assets/image/emptyState.png"),
-                        colorBlendMode: BlendMode.difference,
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    Text("Não há contatos para mostrar",
-                        style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold)),
-                    Text(
-                      "A sua lista de Contatos está vazia.",
-                      style: TextStyle(fontSize: 18, color: Colors.black54),
-                    )
-                  ],
-                ),
-              ),
-            )
-          : ListView.builder(
-              padding: EdgeInsets.all(16),
-              itemCount: contacts.length,
-              itemBuilder: (context, index) {
-                return _contactCard(context, index);
-              },
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('Contatos'),
             ),
+            backgroundColor: Colors.purple,
+            centerTitle: true,
+            actions: [
+              PopupMenuButton<OrderOptions>(
+                itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+                  PopupMenuItem<OrderOptions>(
+                    child: Text('Ordenar de A-Z'),
+                    value: OrderOptions.orderaz,
+                  ),
+                  PopupMenuItem<OrderOptions>(
+                    child: Text('Ordenar de Z-A'),
+                    value: OrderOptions.orderza,
+                  ),
+                ],
+                onSelected: _orderList,
+              )
+            ],
+          ),
+          contacts.isEmpty
+              ? SliverFillRemaining(
+                  child: Column(
+                    children: [
+                      ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                            Colors.purple[100], BlendMode.modulate),
+                        child: Image(
+                          image: AssetImage("assets/image/emptyState.png"),
+                          colorBlendMode: BlendMode.difference,
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      Text("Não há contatos para mostrar",
+                          style: TextStyle(
+                              fontSize: 23,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold)),
+                      Text(
+                        "A sua lista de Contatos está vazia.",
+                        style: TextStyle(fontSize: 18, color: Colors.black54),
+                      )
+                    ],
+                  ),
+                )
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return _contactCard(context, index);
+                    },
+                    childCount: contacts.length,
+                  ),
+                ),
+        ],
+      ),
     );
   }
 
