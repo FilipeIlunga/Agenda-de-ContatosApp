@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                       launch("tel:${contacts[index].phone}");
                     },
                   ),
-                  FlatButton(
+                  TextButton(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
