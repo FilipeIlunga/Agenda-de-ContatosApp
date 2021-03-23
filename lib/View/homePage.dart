@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FlatButton(
+                  TextButton(
                     child: Column(
                       //Serve para o BottoSheet ocupar o minimo de espaço possível
                       mainAxisSize: MainAxisSize.min,
