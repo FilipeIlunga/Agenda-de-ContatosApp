@@ -56,7 +56,7 @@ class _ContactPageState extends State<ContactPage> {
             context: context,
             dialogType: DialogType.WARNING,
             borderSide: BorderSide(color: Colors.purple[100], width: 2),
-            width: 300,
+            width: 350,
             buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
             headerAnimationLoop: false,
             animType: AnimType.BOTTOMSLIDE,
